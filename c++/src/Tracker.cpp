@@ -20,7 +20,8 @@ void Tracker::runFace()
     CascadeClassifier face_cascade;
 
     //use the haarcascade_frontalface_alt.xml library
-    face_cascade.load("dataSets/haarcascade_frontalface_alt.xml");
+    //face_cascade.load("dataSets/haarcascade_frontalface_alt.xml");
+    face_cascade.load("dataSets/haarcascade_mcs_eyepair_small.xml");
  
     //setup video capture device and link it to the first capture device
     VideoCapture capturedevice;

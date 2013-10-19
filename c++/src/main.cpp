@@ -2,11 +2,12 @@
 
 #include "Driver.h"
 #include "Tracker.h"
+#include "Poster.h"
 
 int main(int argc, char* argv[])
 {
-    Tracker d;
-    d.runFace();
+    Poster d;
+    d.send2();
     
     return 0;
 }
