@@ -1,6 +1,6 @@
 *.o
 
 firebreath/src/3rdParty/boost/
-firebreath/tests/
+#firebreath/tests/
 firebreath/fbgen/
 firebreath/gen_templates/
