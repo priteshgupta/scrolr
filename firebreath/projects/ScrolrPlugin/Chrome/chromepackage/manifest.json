@@ -1,0 +1,9 @@
+{
+  "name": "Scrolr Plugin",
+  "version": "${FBSTRING_PLUGIN_VERSION}",
+  "description": "Plugin for the Scrolr chrome extension",
+
+	"plugins": [
+    { "path": "npScrolrPlugin.dll", "public": true }
+  ]
+}
