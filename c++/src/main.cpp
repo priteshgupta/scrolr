@@ -3,13 +3,13 @@
 #include "Driver.h"
 #include "Game.h"
 #include "Poster.h"
-#include "SimInput.h"
+#include "archived/SimInput.h"
 #include "Tracker.h"
 
 int main(int argc, char* argv[])
 {
-    Game d;
-    d.run();
+    Tracker d;
+    d.track();
     
     return 0;
 }

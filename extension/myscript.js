@@ -23,6 +23,7 @@ var plugin = document.getElementById("plugin0");
 alert(plugin.version);
 alert(plugin.getCurrentHeadDirection());
 
-setInterval(function(){
+plugin.testEvent();
+/*setInterval(function(){
   window.scrollBy(0, plugin.getCurrentHeadDirection());
-}, 50);
+}, 50);*/

@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "Tracker.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -10,7 +10,7 @@ using namespace cv;
 using std::cout;
 using std::endl;
 
-void Game::run()
+void Tracker::track()
 {
 
     /**************************************************************************
@@ -21,7 +21,7 @@ void Game::run()
     CascadeClassifier face_cascade;
 
     //use the haarcascade_frontalface_alt.xml library
-    face_cascade.load("dataSets/haarcascade_frontalface_alt.xml");
+    face_cascade.load("haarcascade_frontalface_alt.xml");
     //face_cascade.load("dataSets/haarcascade_mcs_eyepair_small.xml");
  
     //setup video capture device and link it to the first capture device
@@ -41,13 +41,13 @@ void Game::run()
     *********************** User Position Initialization **********************
     **************************************************************************/
 
-    // IMPORTANT VARIABLE
     int xInit = 0;
-    int xMin = 150;
-    int xMax = 500;
-    int columns = 50;
-    int rows = 40;
+    int yInit = 0;
     int n = 100; // number of initialization frames
+    int xTol = 30; // Position tolerance
+    int yTol = 20; // Position tolerance
+    int xState = 0; // 0 is neutral, -1 is right, 1 is left // TODO: Make this an enum
+    int yState = 0; // 0 is neutral, -1 is down, 1 is up // TODO: Make this an enum
  
     cout << "Initialization Started" << endl;
     for(int i = 0; i < n; i++)
@@ -65,27 +65,19 @@ void Game::run()
         }
         if (faces.size() > 0){
             xInit += (2*faces[0].x + faces[0].width)/2.0;
+            yInit += (2*faces[0].y + faces[0].height)/2.0;
         }
         imshow("outputcapture", captureframe);
         waitKey(33);
     }
     xInit /= double(n);
+    yInit /= double(n);
     cout << "Initialization Complete" << endl;
 
 
     /**************************************************************************
-    ********************** Facial Tracking and Game Logic *********************
+    ****************************** Facial Tracking ***************************
     **************************************************************************/
-
-    std::string display[rows]; // The display for the game
-    for (int k = 0; k < rows; k++){ // Initialize the display to empty values
-        std::string row("");
-        for (int j = 0; j < columns; j++){
-            row += "-";
-        }
-        display[k] = row;
-    }
-    int initCounter = 0; //  This counter variable will ensure the player stays centered
 
     while(true)
     {
@@ -102,62 +94,58 @@ void Game::run()
         }
 
         int x;
+        int y;
         if (faces.size() > 0){
             x = (2*faces[0].x + faces[0].width)/2.0;
+            y = (2*faces[0].y + faces[0].height)/2.0;
         }
         else{
             x = xInit;
+            y = yInit;
         }
 
-        string row;
-        int column = columns - (x-xMin)/double(xMax-xMin) * columns;
-        for (int i = 0; i < columns; i++){
-            if (i == column){
-                row += "0";
-            }
-            else{
-                row += "-";
-            }
-        }
-
-        if (initCounter < rows/2) {
-            display[initCounter] = row;
-            initCounter++;
-        }
-        else{
-            std::string tempDisplay[rows];
-            for (int i = 1; i < rows; i++){
-                tempDisplay[i-1] = display[i];
-            }
-
-            // Generate new obstables
-            std::string obRow("");
-            for (int j = 0; j < columns; j++){
-                if (j < 5 || j > (columns-1) - 5) {
-                    obRow += "X"; 
+        // A switch statement for determining the y output of the program
+        switch(yState){
+            case -1: // Down
+                if (y < yInit + yTol){
+                    if (y < yInit - yTol){ yState = 1; cout << "UP" << endl; }
+                    else{ yState = 0; cout << "YNEUTRAL" << endl; }
                 }
-                else{
-                    obRow += "-";
-                }
-            }
-            tempDisplay[rows-1] = obRow;
-        
-            // Overlay the current layer ON rows/2
-            for (int i = 0; i < columns; i++){
-                if (row[i] == '0'){
-                    tempDisplay[rows/2][i] = '0';
-                }
-            }
+                break;
 
-            for (int i = 0; i < rows; i++){
-                display[i] = tempDisplay[i];
-            }
+            case 0: // NEUTRAL
+                if (y < yInit - yTol){ yState = 1; cout << "UP" << endl; }
+                else if (y > yInit + yTol){ yState = -1; cout << "DOWN" << endl;}
+                break;
+
+            case 1: // UP
+                if (y > yInit - yTol){
+                    if (y > yInit + yTol){ yState = -1; cout << "DOWN" << endl; }
+                    else{ yState = 0; cout << "YNEUTRAL" << endl; }
+                }
+                break;
         }
 
+        // A switch statement for determining the x output of the program
+        switch(xState){
+            case -1: // Right
+                if (x > xInit - xTol){
+                    if (x > xInit + xTol){ xState = 1; cout << "LEFT" << endl;}
+                    else{ xState = 0; cout << "XNEUTRAL" << endl;}
+                }
+                break;
 
-        // Print out all rows at the end
-        for (int k = 0; k < rows; k++){
-            cout << display[k] << endl;
+            case 0: // NEUTRAL
+                if (x < xInit - xTol){ xState = -1; cout << "RIGHT" << endl;}
+                else if (x > xInit + xTol){ xState = 1; cout << "LEFT" << endl;}
+                break;
+
+            case 1: // Left
+                if (x < xInit + xTol){
+                    if (x < xInit - xTol){ xState = -1; cout << "RIGHT" << endl; }
+                    else{ xState = 0; cout << "XNEUTRAL" << endl;}
+                }
+                break;
         }
 
         imshow("outputcapture", captureframe);

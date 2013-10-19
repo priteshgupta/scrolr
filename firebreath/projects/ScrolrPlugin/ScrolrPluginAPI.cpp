@@ -11,6 +11,11 @@
 
 #include "ScrolrPluginAPI.h"
 
+
+//Edited by Mack
+#include "Tracker.h"
+
+
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn FB::variant ScrolrPluginAPI::echo(const FB::variant& msg)
 ///
@@ -62,9 +67,11 @@ std::string ScrolrPluginAPI::get_version()
 
 void ScrolrPluginAPI::testEvent()
 {
-    fire_test();
+    //fire_test();
+    Tracker t;
+    t.track();
 }
 
 int ScrolrPluginAPI::getCurrentHeadDirection(){
-    return -3;
+    return -5;
 }

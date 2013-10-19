@@ -30,3 +30,7 @@ add_x11_plugin(${PROJECT_NAME} SOURCES)
 target_link_libraries(${PROJECT_NAME}
     ${PLUGIN_INTERNAL_DEPS}
     )
+
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS} )
