@@ -6,8 +6,8 @@
 
 int main(int argc, char* argv[])
 {
-    Poster d;
-    d.send2();
+    Tracker d;
+    d.runFace();
     
     return 0;
 }

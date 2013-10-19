@@ -6,7 +6,6 @@ class Poster
 
 public:
     void send();
-    void send2();
 
 private:
 
