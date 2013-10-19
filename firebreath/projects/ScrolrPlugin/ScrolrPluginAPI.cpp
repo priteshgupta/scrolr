@@ -75,3 +75,11 @@ void ScrolrPluginAPI::testEvent()
 int ScrolrPluginAPI::getCurrentHeadDirection(){
     return -5;
 }
+
+void ScrolrPluginAPI::track(){
+    m_tracker.track();
+}
+
+bool ScrolrPluginAPI::foundFile(){
+    return m_tracker.m_foundFile;
+}

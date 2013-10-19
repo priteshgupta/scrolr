@@ -11,6 +11,8 @@
 #include "BrowserHost.h"
 #include "ScrolrPlugin.h"
 
+#include "Tracker.h"
+
 #ifndef H_ScrolrPluginAPI
 #define H_ScrolrPluginAPI
 
@@ -29,12 +31,14 @@ public:
     /// @see FB::JSAPIAuto::registerEvent
     ////////////////////////////////////////////////////////////////////////////
     ScrolrPluginAPI(const ScrolrPluginPtr& plugin, const FB::BrowserHostPtr& host) :
-        m_plugin(plugin), m_host(host)
+        m_plugin(plugin), m_host(host), m_tracker()
     {
         registerMethod("echo",      make_method(this, &ScrolrPluginAPI::echo));
         registerMethod("testEvent", make_method(this, &ScrolrPluginAPI::testEvent));
 
         registerMethod("getCurrentHeadDirection", make_method(this, &ScrolrPluginAPI::getCurrentHeadDirection));
+        registerMethod("track", make_method(this, &ScrolrPluginAPI::track));
+        registerMethod("foundFile", make_method(this, &ScrolrPluginAPI::foundFile));
         
         // Read-write property
         registerProperty("testString",
@@ -77,12 +81,17 @@ public:
     void testEvent();
 
     int getCurrentHeadDirection();
+    
+    bool foundFile();
+    void track();
 
 private:
     ScrolrPluginWeakPtr m_plugin;
     FB::BrowserHostPtr m_host;
 
     std::string m_testString;
+    
+    Tracker m_tracker;
 };
 
 #endif // H_ScrolrPluginAPI
