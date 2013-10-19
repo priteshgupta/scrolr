@@ -1,5 +1,5 @@
-#ifndef TRACKER_H_
-#define TRACKER_H_
+#ifndef GAME_H_
+#define GAME_H_
 
 /*
  * This class is an entertaining application of the facial tracking
@@ -10,4 +10,4 @@ public:
     void run();
 };
 
-#endif // TRACKER_H_
+#endif // GAME_H_
