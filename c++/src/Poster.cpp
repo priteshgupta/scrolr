@@ -8,7 +8,7 @@
 #include <curlpp/Easy.hpp>
 #include <curlpp/Options.hpp>
 
-void Poster::send()
+void Poster::send(std::string s)
 {
     // RAII cleanup
     curlpp::Cleanup myCleanup;
@@ -17,7 +17,7 @@ void Poster::send()
     curlpp::Easy myRequest;
 
     // Set the URL.
-    myRequest.setOpt(new curlpp::options::Url(std::string("http://pritesh.info/test_kent.php?test=Mack_was_here")));
+    myRequest.setOpt(new curlpp::options::Url(std::string("http://pritesh.info/test_kent.php?test=" + s)));
 
     // Send request and get a result.
     // By default the result goes to standard output.

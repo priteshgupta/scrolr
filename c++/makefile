@@ -1,6 +1,3 @@
-# - NOTE: This makefile must be located in the
-#         parent directory of src, build, and bin
-
 # Program name
 PROGRAM = Program
 
@@ -19,29 +16,41 @@ BIN = ./bin
 
 # Source files
 FILES = \
-        ${SRC}/HelloWorld.cpp\
-        ${SRC}/StolenCode.cpp
+        ${SRC}/Driver.cpp\
+        ${SRC}/Poster.cpp\
+        ${SRC}/Tracker.cpp\
+        ${SRC}/main.cpp
 
 # Object files
 OBJS = \
-        ${BUILD}/HelloWorld.o\
-        ${BUILD}/StolenCode.o
+        ${BUILD}/Driver.o\
+        ${BUILD}/Poster.o\
+        ${BUILD}/Tracker.o\
+        ${BUILD}/main.o
 
 # Make options
 all: Program
 
 ${PROGRAM}: ${OBJS}
-	${CC} -o ${BIN}/${PROGRAM} ${OBJS}
+	${CC} -o ${BIN}/${PROGRAM} ${OBJS} `pkg-config opencv --libs` `pkg-config curlpp --libs`
 
 # Insert object compilation code below
 
-${BUILD}/HelloWorld.o: ${SRC}/HelloWorld.cpp
-	${CC} ${FLAGS} -c $^
-	mv -f HelloWorld.o ${BUILD}
+${BUILD}/Driver.o: ${SRC}/Driver.cpp
+	${CC} ${FLAGS} -c $^ 
+	mv -f Driver.o ${BUILD}
 
-${BUILD}/StolenCode.o: ${SRC}/StolenCode.cpp
-	${CC} ${FLAGS} -c $^
-	mv -f StolenCode.o ${BUILD}
+${BUILD}/Poster.o: ${SRC}/Poster.cpp
+	${CC} ${FLAGS} -c $^ 
+	mv -f Poster.o ${BUILD}
+
+${BUILD}/Tracker.o: ${SRC}/Tracker.cpp
+	${CC} ${FLAGS} -c $^ 
+	mv -f Tracker.o ${BUILD}
+
+${BUILD}/main.o: ${SRC}/main.cpp
+	${CC} ${FLAGS} -c $^ 
+	mv -f main.o ${BUILD}
 
 # Cleans out the build directory
 clean:
