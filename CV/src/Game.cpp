@@ -1,5 +1,6 @@
 #include "Game.h"
 
+#include <cstdlib>
 #include <iostream>
 #include <stdio.h>
 #include <opencv/cv.h>
@@ -19,14 +20,15 @@ void Game::run()
     int xMin = 150; // NOTE: Hardcoded
     int xMax = 500; // NOTE: Hardcoded
     int rows = 40; // NOTE: Hardcoded
-    int columns = 50; // Mutable, must be greater than 20
+    int columns = 70; // Mutable, must be greater than 20
     int wallWidth = 5; // Mutable, must be greater than 20
-    char spacer = '-';
+    char spacer = ' ';
     char player = '0';
     char obstacle = '=';
     char crash = 'X';
     bool alive = true;
     int counter = 0;
+    double difficulty = 0.1;
 
     /**************************************************************************
     ******************** Window and Detector Initialization *******************
@@ -116,6 +118,9 @@ void Game::run()
                 if (j < wallWidth || j > (columns-1) - wallWidth) {
                     obRow += obstacle; 
                 }
+                else if(rand() % 1000 - difficulty*sqrt(counter) < 1){
+                    obRow += obstacle;
+                }
                 else{
                     obRow += spacer;
                 }
@@ -142,12 +147,24 @@ void Game::run()
         }
 
 
+        // Update the score display
+        for (int i = 0; i < rows; i++){
+            display[i].resize(columns);
+        }
+        std::stringstream s1;
+        s1 << counter;
+        display[rows-1] += ("   Score: " + s1.str());
+
+
         // Print out all rows at the end
         for (int k = 0; k < rows; k++){
             cout << display[k] << endl;
         }
 
         counter++; // Increase the score
+        if (counter/500 + 5 > wallWidth){
+            wallWidth = 5 + counter/500;
+        }
         
         imshow("Live Feed", captureframe);
         waitKey(33);
@@ -159,10 +176,7 @@ void Game::run()
 
 void Game::gameOver(int score){
 
-    cout << "\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-         << "\nXXXXXXXXXXXXXXX GAME OVER XXXXXXXXXXXXXXXXXXXXXXXXXX"
-         << "\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-         << endl;
+    cout << "\nGAME OVER" << endl;
     
-    cout << "\nSCORE: " << score << endl;
+    cout << "\nSCORE: " << score-1 << endl;
 }
