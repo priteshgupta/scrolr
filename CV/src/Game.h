@@ -8,6 +8,8 @@ class Game
 {
 public:
     void run();
+    void gameOver(int score);
+
 };
 
 #endif // GAME_H_

@@ -1,6 +1,7 @@
 #include "Tracker.h"
 
 #include <iostream>
+#include <fstream>
 #include <stdio.h>
 #include <opencv/cv.h>
 #include <opencv2/opencv.hpp>
@@ -9,6 +10,11 @@
 using namespace cv;
 using std::cout;
 using std::endl;
+using std::fstream;
+
+
+Tracker::Tracker(): m_foundFile(false)
+{}
 
 void Tracker::track()
 {
@@ -19,6 +25,14 @@ void Tracker::track()
 
     //create the cascade classifier object used for the face detection
     CascadeClassifier face_cascade;
+
+    // TODO: DEBUG
+    fstream file("dataSets/haarcascade_frontalface_alt.xml");
+    if (file){
+        m_foundFile = true;
+        cout << "File found!" << endl;
+    }
+
 
     //use the haarcascade_frontalface_alt.xml library
     face_cascade.load("dataSets/haarcascade_frontalface_alt.xml");

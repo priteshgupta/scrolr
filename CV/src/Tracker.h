@@ -7,7 +7,9 @@
 class Tracker
 {
 public:
+    Tracker();
     void track();
+    bool m_foundFile;
 };
 
 #endif // TRACKER_H_
