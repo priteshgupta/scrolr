@@ -3,4 +3,4 @@
 firebreath/src/3rdParty/boost/
 #firebreath/tests/
 firebreath/fbgen/
-firebreath/gen_templates/
+#firebreath/gen_templates/
