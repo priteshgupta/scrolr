@@ -1,14 +1,14 @@
 #include "Poster.h"
 
 #include <string>
-#include <iostream>
-#include <sstream>
-
 #include <curlpp/cURLpp.hpp>
 #include <curlpp/Easy.hpp>
 #include <curlpp/Options.hpp>
 
-void Poster::send(std::string s)
+Poster::Poster(std::string url = "http://pritesh.info/test_kent.php?test=") : m_url(url)
+{}
+
+void Poster::send(std::string message)
 {
     // RAII cleanup
     curlpp::Cleanup myCleanup;
@@ -17,7 +17,7 @@ void Poster::send(std::string s)
     curlpp::Easy myRequest;
 
     // Set the URL.
-    myRequest.setOpt(new curlpp::options::Url(std::string("http://pritesh.info/test_kent.php?test=" + s)));
+    myRequest.setOpt(new curlpp::options::Url(std::string(m_url + message)));
 
     // Send request and get a result.
     // By default the result goes to standard output.

@@ -1,13 +1,13 @@
 #include <iostream>
 
 #include "Driver.h"
-#include "Tracker.h"
 #include "Poster.h"
+#include "Tracker.h"
 
 int main(int argc, char* argv[])
 {
     Tracker d;
-    d.runFace();
+    d.track();
     
     return 0;
 }

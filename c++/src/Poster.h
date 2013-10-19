@@ -3,10 +3,16 @@
 
 #include <string>
 
+/*
+ * A small class whose sole responsibility is to post info to the web
+ */
 class Poster
 {
 public:
-    void send(std::string s);
+    Poster(std::string url);
+    void send(std::string message);
+private:
+    std::string m_url;
 };
 
 #endif // POSTER_H_

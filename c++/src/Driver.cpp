@@ -1,14 +1,10 @@
-// C++ Libraries
+#include "Driver.h"
+
 #include <iostream>
 #include <stdio.h>
-
-// OpenCV Libraries
 #include <opencv/cv.h>
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
-
-// Header files
-#include "Driver.h"
 
 using namespace cv;
 
@@ -81,9 +77,7 @@ void Driver::runEdges()
     }
 }
 
-
-
-int Driver::runFace()
+void Driver::runFace()
 {
     //create the cascade classifier object used for the face detection
     CascadeClassifier face_cascade;
@@ -119,7 +113,7 @@ int Driver::runFace()
         face_cascade.detectMultiScale(grayscaleframe, faces, 1.1, 3, CV_HAAR_FIND_BIGGEST_OBJECT|CV_HAAR_SCALE_IMAGE, Size(30,30));
  
         //draw a rectangle for all found faces in the vector array on the original image
-        for(int i = 0; i < faces.size(); i++)
+        for(size_t i = 0; i < faces.size(); i++)
         {
             Point pt1(faces[i].x + faces[i].width, faces[i].y + faces[i].height);
             Point pt2(faces[i].x, faces[i].y);
@@ -133,6 +127,4 @@ int Driver::runFace()
         //pause for 33ms
         waitKey(33);
     }
- 
-    return 0;
 }
