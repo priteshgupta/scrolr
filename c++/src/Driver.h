@@ -6,6 +6,8 @@ class Driver
 public:
     void runVideo();
     void runBright();
+    void runEdges();
+    int runFace();
 
 private:
 

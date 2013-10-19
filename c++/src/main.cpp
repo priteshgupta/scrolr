@@ -2,11 +2,10 @@
 
 #include "Driver.h"
 
-int main(int argc, char* argv[]){
-
+int main(int argc, char* argv[])
+{
     Driver d;
-    d.runVideo();
-    d.runBright();
+    d.runFace();
     
     return 0;
 }
