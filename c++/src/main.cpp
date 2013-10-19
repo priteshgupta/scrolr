@@ -1,13 +1,14 @@
 #include <iostream>
 
 #include "Driver.h"
+#include "Game.h"
 #include "Poster.h"
 #include "Tracker.h"
 
 int main(int argc, char* argv[])
 {
-    Tracker d;
-    d.track();
+    Game d;
+    d.run();
     
     return 0;
 }

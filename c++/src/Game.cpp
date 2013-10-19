@@ -1,4 +1,4 @@
-#include "Tracker.h"
+#include "Game.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -10,7 +10,7 @@ using namespace cv;
 using std::cout;
 using std::endl;
 
-void Tracker::track()
+void Game::run()
 {
 
     /**************************************************************************
@@ -43,11 +43,10 @@ void Tracker::track()
 
     int xInit = 0;
     int yInit = 0;
+    int xMin = 150;
+    int xMax = 500;
+    int columns = 50;
     int n = 100; // number of initialization frames
-    int xTol = 30; // Position tolerance
-    int yTol = 20; // Position tolerance
-    int xState = 0; // 0 is neutral, -1 is right, 1 is left // TODO: Make this an enum
-    int yState = 0; // 0 is neutral, -1 is down, 1 is up // TODO: Make this an enum
  
     cout << "Initialization Started" << endl;
     for(int i = 0; i < n; i++)
@@ -103,50 +102,19 @@ void Tracker::track()
             x = xInit;
             y = yInit;
         }
-
-        // A switch statement for determining the y output of the program
-        switch(yState){
-            case -1: // Down
-                if (y < yInit + yTol){
-                    if (y < yInit - yTol){ yState = 1; cout << "UP" << endl; }
-                    else{ yState = 0; cout << "YNEUTRAL" << endl; }
-                }
-                break;
-
-            case 0: // NEUTRAL
-                if (y < yInit - yTol){ yState = 1; cout << "UP" << endl; }
-                else if (y > yInit + yTol){ yState = -1; cout << "DOWN" << endl;}
-                break;
-
-            case 1: // UP
-                if (y > yInit - yTol){
-                    if (y > yInit + yTol){ yState = -1; cout << "DOWN" << endl; }
-                    else{ yState = 0; cout << "YNEUTRAL" << endl; }
-                }
-                break;
+        
+        //cout << x;
+        int column = columns - (x-xMin)/double(xMax-xMin) * columns;
+        for (int i = 0; i < columns; i++){
+            if (i == column){
+                cout << "0";
+            }
+            else{
+                cout << "-";
+            }
         }
-
-        // A switch statement for determining the x output of the program
-        switch(xState){
-            case -1: // Right
-                if (x > xInit - xTol){
-                    if (x > xInit + xTol){ xState = 1; cout << "LEFT" << endl;}
-                    else{ xState = 0; cout << "XNEUTRAL" << endl;}
-                }
-                break;
-
-            case 0: // NEUTRAL
-                if (x < xInit - xTol){ xState = -1; cout << "RIGHT" << endl;}
-                else if (x > xInit + xTol){ xState = 1; cout << "LEFT" << endl;}
-                break;
-
-            case 1: // Left
-                if (x < xInit + xTol){
-                    if (x < xInit - xTol){ xState = -1; cout << "RIGHT" << endl; }
-                    else{ xState = 0; cout << "XNEUTRAL" << endl;}
-                }
-                break;
-        }
+        cout << endl;
+        //cout << column << endl;
 
         imshow("outputcapture", captureframe);
         waitKey(33);
