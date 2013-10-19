@@ -83,7 +83,8 @@ void Driver::runFace()
     CascadeClassifier face_cascade;
 
     //use the haarcascade_frontalface_alt.xml library
-    face_cascade.load("datasets/haarcascade_frontalface_alt.xml");
+    // NOTE: If you can't see any rectangles, try full file path
+    face_cascade.load("dataSets/haarcascade_frontalface_alt.xml");
  
     //setup video capture device and link it to the first capture device
     VideoCapture capturedevice;

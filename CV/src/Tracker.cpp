@@ -23,20 +23,19 @@ void Tracker::track()
     ******************** Window and Detector Initialization *******************
     **************************************************************************/
 
+    // NOTE: If you can't see any rectangles, try full file path
+    const char* s = "/home/mackward/scrolr/firebreath/projects/ScrolrPlugin/haarcascade_frontalface_alt.xml";
+
+    fstream file(s);
+    if (file){
+        m_foundFile = true;
+    }
+
     //create the cascade classifier object used for the face detection
     CascadeClassifier face_cascade;
 
-    // TODO: DEBUG
-    fstream file("dataSets/haarcascade_frontalface_alt.xml");
-    if (file){
-        m_foundFile = true;
-        cout << "File found!" << endl;
-    }
-
-
     //use the haarcascade_frontalface_alt.xml library
-    face_cascade.load("dataSets/haarcascade_frontalface_alt.xml");
-    //face_cascade.load("dataSets/haarcascade_mcs_eyepair_small.xml");
+    face_cascade.load(s);
  
     //setup video capture device and link it to the first capture device
     VideoCapture capturedevice;
@@ -48,7 +47,6 @@ void Tracker::track()
  
     //create a window to present the results
     namedWindow("outputcapture", 1);
-
 
 
     /**************************************************************************

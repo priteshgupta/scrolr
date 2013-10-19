@@ -20,15 +20,17 @@ void Game::run()
     int xMin = 150; // NOTE: Hardcoded
     int xMax = 500; // NOTE: Hardcoded
     int rows = 40; // NOTE: Hardcoded
-    int columns = 70; // Mutable, must be greater than 20
-    int wallWidth = 5; // Mutable, must be greater than 20
+    int columns = 100; // Mutable, must be greater than 20
+    int wallWidth = 5;
+    int minWidth = 10;
     char spacer = ' ';
     char player = '0';
     char obstacle = '=';
     char crash = 'X';
     bool alive = true;
     int counter = 0;
-    double difficulty = 0.1;
+    double difficulty = .5; // 0.05 to 5
+    int levelLength = 100;
 
     /**************************************************************************
     ******************** Window and Detector Initialization *******************
@@ -162,8 +164,10 @@ void Game::run()
         }
 
         counter++; // Increase the score
-        if (counter/500 + 5 > wallWidth){
-            wallWidth = 5 + counter/500;
+        if (counter/levelLength + 5 > wallWidth){ // TODO: The '5' is harcoded here
+            if (columns - wallWidth*2 >= minWidth){
+                wallWidth = 5 + counter/levelLength;
+            }
         }
         
         imshow("Live Feed", captureframe);
@@ -177,6 +181,4 @@ void Game::run()
 void Game::gameOver(int score){
 
     cout << "\nGAME OVER" << endl;
-    
-    cout << "\nSCORE: " << score-1 << endl;
 }
