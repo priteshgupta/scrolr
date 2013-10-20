@@ -23,9 +23,10 @@ window.onload = function () {
   var plugin = plugin0();
   alert("ready?");
   console.log("initializing");
-  //plugin.initialize();
+  plugin.initialize();
+  plugin.tracking = true;
   console.log("starting tracking loop");
-  //runTrackingLoop();
+  runTrackingLoop();
   //appendToDoc("version = " + plugin.version);
   //appendToDoc("tracking = " + plugin.tracking);
 };
@@ -38,7 +39,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
   } else {
     plugin.tracking = true;
     chrome.browserAction.setIcon({path: "icon-32.png"});
-    //runTrackingLoop();
+    runTrackingLoop();
   }
 });
 
