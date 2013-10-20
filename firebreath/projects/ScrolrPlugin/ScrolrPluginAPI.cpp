@@ -82,6 +82,10 @@ void ScrolrPluginAPI::initialize(){
     m_tracker.initialize();
 }
 
+void ScrolrPluginAPI::kill(){
+    m_tracker.kill();
+}
+
 bool ScrolrPluginAPI::foundFile(){
     return m_tracker.m_foundFile;
 }

@@ -14,7 +14,8 @@ using std::endl;
 using std::fstream;
 
 
-Tracker::Tracker(): m_foundFile(false), m_isTracking(false), xOffset(0), yOffset(0), xInit(0), yInit(0)
+Tracker::Tracker(): m_foundFile(false), m_isTracking(false), xOffset(0), yOffset(0), 
+                    xInit(0), yInit(0), m_isInitialized(false)
 {}
 
 Tracker::~Tracker() {}
@@ -158,4 +159,10 @@ void Tracker::runInitialize(){
     xInit /= double(n);
     yInit /= double(n);
     //cout << "Initialization Complete" << endl;
+
+    m_isInitialized = true;
+}
+
+void Tracker::kill(){
+    delete m_thread;
 }

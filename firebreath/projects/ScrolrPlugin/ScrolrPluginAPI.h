@@ -38,6 +38,8 @@ public:
         registerMethod("getCurrentXOffset", make_method(this, &ScrolrPluginAPI::getCurrentXOffset));
         registerMethod("getCurrentYOffset", make_method(this, &ScrolrPluginAPI::getCurrentYOffset));
         registerMethod("track", make_method(this, &ScrolrPluginAPI::track));
+        registerMethod("initialize", make_method(this, &ScrolrPluginAPI::initialize));
+        registerMethod("kill", make_method(this, &ScrolrPluginAPI::kill));
         registerMethod("foundFile", make_method(this, &ScrolrPluginAPI::foundFile));
         
         // Read-write property
@@ -88,6 +90,7 @@ public:
     bool foundFile();
     void track();
     void initialize();
+    void kill();
     bool get_isTracking();
     void set_isTracking(bool);
 

@@ -15,9 +15,12 @@ public:
     void runThread();
     void initialize();
     void runInitialize();
+    void kill();
     bool m_foundFile;
     bool m_isTracking;
+    bool m_isInitialized;
     boost::thread* m_thread;
+    
     
     // The current offsets
     int yOffset;
