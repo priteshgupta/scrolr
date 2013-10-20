@@ -28,19 +28,11 @@ public:
     int yInit;
     int xInit;
 
-    // Other member variables
-    const char* s;
-
     //create the cascade classifier object used for the face detection
     cv::CascadeClassifier face_cascade;
 
     //setup video capture device and link it to the first capture device
     cv::VideoCapture capturedevice;
-
-    //setup image files used in the capture process
-    cv::Mat captureframe;
-    cv::Mat grayscaleframe;
-
 };
 
 #endif // TRACKER_H_

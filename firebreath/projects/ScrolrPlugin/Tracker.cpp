@@ -14,20 +14,11 @@ using std::endl;
 using std::fstream;
 
 
-// NOTE: If you can't see any rectangles, try full file path
-const char* s = "/home/mackward/scrolr/firebreath/projects/ScrolrPlugin/haarcascade_frontalface_alt.xml";
 
 Tracker::Tracker(): m_foundFile(false), m_isTracking(true), xOffset(0), yOffset(0), 
-                    xInit(0), yInit(0), m_isInitialized(false), face_cascade(), 
-                    capturedevice(), captureframe(), grayscaleframe()
-{
-    //use the haarcascade_frontalface_alt.xml library
-    face_cascade.load(s);
-    capturedevice.open(0);
-    //create a window to present the results
-    namedWindow("outputcapture", 1);
-}
-
+                    xInit(0), yInit(0), m_isInitialized(false), face_cascade(),
+                    capturedevice()
+{}
 
 Tracker::~Tracker() {}
 
@@ -36,6 +27,19 @@ int Tracker::track(){
     /**************************************************************************
      ****************************** Facial Tracking ***************************
      **************************************************************************/
+
+    //setup image files used in the capture process
+    cv::Mat captureframe;
+    cv::Mat grayscaleframe;
+
+    // NOTE: If you can't see any rectangles, try full file path
+    char* s = "/home/mackward/scrolr/temp/src/dataSets/haarcascade_frontalface_alt.xml";
+
+    //use the haarcascade_frontalface_alt.xml library
+    face_cascade.load(s);
+    capturedevice.open(0);
+    //create a window to present the results
+    namedWindow("outputcapture", 1);
 
     capturedevice>>captureframe;
     cvtColor(captureframe, grayscaleframe, CV_BGR2GRAY);
@@ -60,11 +64,12 @@ int Tracker::track(){
         y = yInit;
     }
 
-    xOffset = (x - xInit)/30;
-    yOffset = (y - yInit)/30;
+    xOffset = (x - xInit)/10;
+    yOffset = (y - yInit)/10;
 
     imshow("outputcapture", captureframe); // TODO
-    waitKey(5);
+    waitKey(33);
+
     return yOffset;
 }
 
@@ -75,7 +80,8 @@ void Tracker::initialize(){
      **************************************************************************/
 
     // NOTE: If you can't see any rectangles, try full file path
-    const char* s = "/home/mackward/scrolr/firebreath/projects/ScrolrPlugin/haarcascade_frontalface_alt.xml";
+    const char* s = "/home/mackward/scrolr/temp/src/dataSets/haarcascade_frontalface_alt.xml";
+    //const char* s = "/home/mackward/scrolr/firebreath/projects/ScrolrPlugin/haarcascade_frontalface_alt.xml";
 
     fstream file(s);
     if (file){
