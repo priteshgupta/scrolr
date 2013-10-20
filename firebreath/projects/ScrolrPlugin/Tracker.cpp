@@ -64,11 +64,11 @@ int Tracker::track(){
         y = yInit;
     }
 
-    xOffset = (x - xInit)/10;
-    yOffset = (y - yInit)/10;
+    xOffset = (x - xInit);
+    yOffset = (y - yInit);
 
     imshow("outputcapture", captureframe); // TODO
-    waitKey(33);
+    waitKey(5);
 
     return yOffset;
 }

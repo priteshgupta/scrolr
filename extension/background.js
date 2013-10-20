@@ -22,7 +22,7 @@ window.onload = function () {
   console.log("initializing");
   plugin.initialize();
   console.log("starting for loop");  
-  for(var x = 0; x < 30; x++){
+  while(true){
     var ret = plugin.track();
     console.log(ret);
     chrome.tabs.executeScript(null, {code: "window.scrollBy(0, "+ret+");"}); 
