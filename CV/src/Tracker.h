@@ -8,8 +8,10 @@ class Tracker
 {
 public:
     Tracker();
+    ~Tracker();
     void track();
     bool m_foundFile;
+    bool m_isTracking;
 };
 
 #endif // TRACKER_H_

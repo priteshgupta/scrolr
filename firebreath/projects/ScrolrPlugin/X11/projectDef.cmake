@@ -13,6 +13,8 @@ file (GLOB PLATFORM RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
     X11/[^.]*.cmake
     )
 
+set(CMAKE_CXX_FLAGS "-std=c++0x")
+
 SOURCE_GROUP(X11 FILES ${PLATFORM})
 
 # use this to add preprocessor definitions

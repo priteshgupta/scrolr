@@ -13,56 +13,57 @@ using std::endl;
 using std::fstream;
 
 
-Tracker::Tracker(): m_foundFile(false)
+Tracker::Tracker(): m_foundFile(false), m_isTracking(false)
 {}
 
-void Tracker::track()
+Tracker::~Tracker() {}
+
+void Tracker::track(int x)
 {
 
     /**************************************************************************
-    ******************** Window and Detector Initialization *******************
-    **************************************************************************/
+     ******************** Window and Detector Initialization *******************
+     **************************************************************************/
+
+    // NOTE: If you can't see any rectangles, try full file path
+    const char* s = "/home/mackward/scrolr/firebreath/projects/ScrolrPlugin/haarcascade_frontalface_alt.xml";
+
+    fstream file(s);
+    if (file){
+        m_foundFile = true;
+    }
 
     //create the cascade classifier object used for the face detection
     CascadeClassifier face_cascade;
 
-    // TODO: DEBUG
-    fstream file("haarcascade_frontalface_alt.xml");
-    if (file){
-        m_foundFile = true;
-        cout << "File found!" << endl;
-    }
-
     //use the haarcascade_frontalface_alt.xml library
-    face_cascade.load("haarcascade_frontalface_alt.xml");
-    //face_cascade.load("dataSets/haarcascade_mcs_eyepair_small.xml");
- 
+    face_cascade.load(s);
+
     //setup video capture device and link it to the first capture device
     VideoCapture capturedevice;
     capturedevice.open(0);
- 
+
     //setup image files used in the capture process
     Mat captureframe;
     Mat grayscaleframe;
- 
+
     //create a window to present the results
     namedWindow("outputcapture", 1);
 
 
-
     /**************************************************************************
-    *********************** User Position Initialization **********************
-    **************************************************************************/
+     *********************** User Position Initialization **********************
+     **************************************************************************/
 
     int xInit = 0;
     int yInit = 0;
-    int n = 100; // number of initialization frames
+    int n = 20; // number of initialization frames
     int xTol = 30; // Position tolerance
     int yTol = 20; // Position tolerance
     int xState = 0; // 0 is neutral, -1 is right, 1 is left // TODO: Make this an enum
     int yState = 0; // 0 is neutral, -1 is down, 1 is up // TODO: Make this an enum
- 
-    cout << "Initialization Started" << endl;
+
+    /*cout << "Initialization Started" << endl;
     for(int i = 0; i < n; i++)
     {
         capturedevice >> captureframe;
@@ -85,14 +86,14 @@ void Tracker::track()
     }
     xInit /= double(n);
     yInit /= double(n);
-    cout << "Initialization Complete" << endl;
+    cout << "Initialization Complete" << endl;*/
 
 
     /**************************************************************************
-    ****************************** Facial Tracking ***************************
-    **************************************************************************/
+     ****************************** Facial Tracking ***************************
+     **************************************************************************/
 
-    while(true)
+    while(m_isTracking)
     {
         capturedevice>>captureframe;
         cvtColor(captureframe, grayscaleframe, CV_BGR2GRAY);
@@ -165,3 +166,4 @@ void Tracker::track()
         waitKey(33);
     }
 }
+

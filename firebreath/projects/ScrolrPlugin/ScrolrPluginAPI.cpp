@@ -14,6 +14,7 @@
 
 //Edited by Mack
 #include "Tracker.h"
+#include <boost/thread.hpp>
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -59,17 +60,12 @@ void ScrolrPluginAPI::set_testString(const std::string& val)
     m_testString = val;
 }
 
+
+
 // Read-only property version
 std::string ScrolrPluginAPI::get_version()
 {
     return FBSTRING_PLUGIN_VERSION;
-}
-
-void ScrolrPluginAPI::testEvent()
-{
-    //fire_test();
-    Tracker t;
-    t.track();
 }
 
 int ScrolrPluginAPI::getCurrentHeadDirection(){
@@ -77,9 +73,22 @@ int ScrolrPluginAPI::getCurrentHeadDirection(){
 }
 
 void ScrolrPluginAPI::track(){
-    m_tracker.track();
+   //std::thread t(m_tracker.track, 0);
+   boost::thread m_thread = boost::thread(foo, 0);
+}
+
+void ScrolrPluginAPI::foo(int s){
+    std::cout << "Test" << std::endl;
 }
 
 bool ScrolrPluginAPI::foundFile(){
     return m_tracker.m_foundFile;
+}
+
+bool ScrolrPluginAPI::get_isTracking(){
+    return m_tracker.m_isTracking;
+}
+
+void ScrolrPluginAPI::set_isTracking(bool t){
+    m_tracker.m_isTracking = t;
 }

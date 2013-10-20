@@ -12,6 +12,7 @@
 #include "ScrolrPlugin.h"
 
 #include "Tracker.h"
+#include <boost/thread.hpp>
 
 #ifndef H_ScrolrPluginAPI
 #define H_ScrolrPluginAPI
@@ -34,7 +35,6 @@ public:
         m_plugin(plugin), m_host(host), m_tracker()
     {
         registerMethod("echo",      make_method(this, &ScrolrPluginAPI::echo));
-        registerMethod("testEvent", make_method(this, &ScrolrPluginAPI::testEvent));
 
         registerMethod("getCurrentHeadDirection", make_method(this, &ScrolrPluginAPI::getCurrentHeadDirection));
         registerMethod("track", make_method(this, &ScrolrPluginAPI::track));
@@ -45,7 +45,11 @@ public:
                          make_property(this,
                                        &ScrolrPluginAPI::get_testString,
                                        &ScrolrPluginAPI::set_testString));
-        
+                
+        registerProperty("tracking", make_property(this,
+            &ScrolrPluginAPI::get_isTracking,
+            &ScrolrPluginAPI::set_isTracking));
+
         // Read-only property
         registerProperty("version",
                          make_property(this,
@@ -78,12 +82,14 @@ public:
     FB_JSAPI_EVENT(echo, 2, (const FB::variant&, const int));
 
     // Method test-event
-    void testEvent();
 
     int getCurrentHeadDirection();
     
     bool foundFile();
     void track();
+    bool get_isTracking();
+    void set_isTracking(bool);
+    static void foo(int s);
 
 private:
     ScrolrPluginWeakPtr m_plugin;
@@ -92,6 +98,7 @@ private:
     std::string m_testString;
     
     Tracker m_tracker;
+    boost::thread m_thread;
 };
 
 #endif // H_ScrolrPluginAPI

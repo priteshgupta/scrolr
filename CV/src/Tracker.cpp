@@ -13,8 +13,10 @@ using std::endl;
 using std::fstream;
 
 
-Tracker::Tracker(): m_foundFile(false)
+Tracker::Tracker(): m_foundFile(false), m_isTracking(true)
 {}
+
+Tracker::~Tracker() {}
 
 void Tracker::track()
 {
@@ -24,7 +26,7 @@ void Tracker::track()
     **************************************************************************/
 
     // NOTE: If you can't see any rectangles, try full file path
-    const char* s = "/home/mackward/scrolr/firebreath/projects/ScrolrPlugin/haarcascade_frontalface_alt.xml";
+    const char* s = "dataSets/haarcascade_frontalface_alt.xml";
 
     fstream file(s);
     if (file){
@@ -91,7 +93,7 @@ void Tracker::track()
     ****************************** Facial Tracking ***************************
     **************************************************************************/
 
-    while(true)
+    while(m_isTracking)
     {
         capturedevice>>captureframe;
         cvtColor(captureframe, grayscaleframe, CV_BGR2GRAY);

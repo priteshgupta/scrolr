@@ -8,8 +8,8 @@
 
 int main(int argc, char* argv[])
 {
-    Tracker d;
-    d.track();
+    Game d;
+    d.run();
     
     return 0;
 }
