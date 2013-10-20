@@ -60,8 +60,6 @@ void ScrolrPluginAPI::set_testString(const std::string& val)
     m_testString = val;
 }
 
-
-
 // Read-only property version
 std::string ScrolrPluginAPI::get_version()
 {
@@ -69,15 +67,15 @@ std::string ScrolrPluginAPI::get_version()
 }
 
 int ScrolrPluginAPI::getCurrentHeadDirection(){
+    // TODO
     return -5;
 }
 
 void ScrolrPluginAPI::track(){
-   //std::thread t(m_tracker.track, 0);
-   boost::thread m_thread = boost::thread(foo, 0);
+    m_tracker.track();
 }
 
-void ScrolrPluginAPI::foo(int s){
+void ScrolrPluginAPI::foo(int s){// TODO: REmove
     std::cout << "Test" << std::endl;
 }
 

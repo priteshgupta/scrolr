@@ -12,7 +12,6 @@
 #include "ScrolrPlugin.h"
 
 #include "Tracker.h"
-#include <boost/thread.hpp>
 
 #ifndef H_ScrolrPluginAPI
 #define H_ScrolrPluginAPI
@@ -89,7 +88,8 @@ public:
     void track();
     bool get_isTracking();
     void set_isTracking(bool);
-    static void foo(int s);
+    //static void foo(int s);
+    void foo(int s);
 
 private:
     ScrolrPluginWeakPtr m_plugin;
@@ -98,7 +98,6 @@ private:
     std::string m_testString;
     
     Tracker m_tracker;
-    boost::thread m_thread;
 };
 
 #endif // H_ScrolrPluginAPI

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
+#include <boost/thread.hpp>
 #include <opencv/cv.h>
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -18,8 +19,12 @@ Tracker::Tracker(): m_foundFile(false), m_isTracking(false)
 
 Tracker::~Tracker() {}
 
-void Tracker::track(int x)
+void Tracker::track()
 {
+   m_thread = new boost::thread(&Tracker::runThread, this);
+}
+
+void Tracker::runThread(){
 
     /**************************************************************************
      ******************** Window and Detector Initialization *******************
