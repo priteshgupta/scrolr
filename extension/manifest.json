@@ -6,11 +6,9 @@
   "version": "1.0",
 
   "permissions": [
-    "tabs",
-    "http://www.google.com/*",
-    "https://www.google.com/*",
     "http://*/",
     "https://*/",
+    "tabs",
     "activeTab",
     "background"
   ],
