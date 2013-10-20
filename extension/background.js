@@ -18,16 +18,16 @@ function appendToDoc(text){
 
 window.onload = function () {
   var plugin = plugin0();
-  alert("hi!");
+  alert("ready?");
   plugin.tracking = true;
   plugin.initialize();
-  //alert("initializing");
-  for(var x = 0; x < 100; x++){
+  for(var x = 0; x < 30; x++){
     var ret = plugin.track();
-    console.log(x);
+    console.log(ret);
+    chrome.tabs.executeScript(null, {code: "window.scrollBy(0, "+ret+");"}); 
+    //window.scrollBy(0, ret);
   }
   //appendToDoc("version = " + plugin.version);
   //appendToDoc("tracking = " + plugin.tracking);
-  //alert("should now be tracking: " + plugin.tracking);
 };
 
