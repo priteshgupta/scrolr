@@ -1,10 +1,4 @@
-/*
-// React when a browser action's icon is clicked.
-chrome.browserAction.onClicked.addListener(function(tab) {
-  //myscript.js is injected into the current page
-  chrome.tabs.executeScript(null, {file: "myscript.js"}); 
-});
-*/
+
 function plugin0 (){
   return document.getElementById('plugin0');
 }
@@ -16,19 +10,35 @@ function appendToDoc(text){
   placeholder.appendChild(document.createElement('br'));
 }
 
+function runTrackingLoop(){
+  var plugin = plugin0();
+  while(plugin.tracking){
+    var ret = plugin.track();
+    console.log(ret);
+    chrome.tabs.executeScript(null, {code: "window.scrollBy(0, "+ret+");"});
+  }
+}
+
 window.onload = function () {
   var plugin = plugin0();
   alert("ready?");
   console.log("initializing");
-  plugin.initialize();
-  console.log("starting for loop");  
-  while(true){
-    var ret = plugin.track();
-    console.log(ret);
-    chrome.tabs.executeScript(null, {code: "window.scrollBy(0, "+ret+");"}); 
-    //window.scrollBy(0, ret);
-  }
+  //plugin.initialize();
+  console.log("starting tracking loop");
+  //runTrackingLoop();
   //appendToDoc("version = " + plugin.version);
   //appendToDoc("tracking = " + plugin.tracking);
 };
+
+chrome.browserAction.onClicked.addListener(function(tab) {
+  var plugin = plugin0();
+  if(plugin.tracking){
+    plugin.tracking = false;
+    chrome.browserAction.setIcon({path: "icon-32-grey.png"});
+  } else {
+    plugin.tracking = true;
+    chrome.browserAction.setIcon({path: "icon-32.png"});
+    //runTrackingLoop();
+  }
+});
 
