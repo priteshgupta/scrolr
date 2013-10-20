@@ -19,8 +19,9 @@ function appendToDoc(text){
 window.onload = function () {
   var plugin = plugin0();
   alert("ready?");
-  plugin.tracking = true;
+  console.log("initializing");
   plugin.initialize();
+  console.log("starting for loop");  
   for(var x = 0; x < 30; x++){
     var ret = plugin.track();
     console.log(ret);
