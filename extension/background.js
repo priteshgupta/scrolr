@@ -17,11 +17,15 @@ function appendToDoc(text){
 }
 
 window.onload = function () {
-  //var plugin = plugin0();
+  var plugin = plugin0();
   alert("hi!");
-  //plugin.tracking = true;
-  //plugin.initialize();
+  plugin.tracking = true;
+  plugin.initialize();
   //alert("initializing");
+  for(var x = 0; x < 100; x++){
+    var ret = plugin.track();
+    console.log(x);
+  }
   //appendToDoc("version = " + plugin.version);
   //appendToDoc("tracking = " + plugin.tracking);
   //alert("should now be tracking: " + plugin.tracking);
