@@ -12,12 +12,20 @@ public:
     Tracker();
     ~Tracker();
     void track();
-    void initialize();
     void runThread();
+    void initialize();
+    void runInitialize();
     bool m_foundFile;
     bool m_isTracking;
-    
     boost::thread* m_thread;
+    
+    // The current offsets
+    int yOffset;
+    int xOffset;
+
+    // Initial values for x and y, set in the initialize
+    int yInit;
+    int xInit;
 };
 
 #endif // TRACKER_H_

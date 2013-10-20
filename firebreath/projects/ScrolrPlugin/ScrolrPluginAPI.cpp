@@ -66,17 +66,20 @@ std::string ScrolrPluginAPI::get_version()
     return FBSTRING_PLUGIN_VERSION;
 }
 
-int ScrolrPluginAPI::getCurrentHeadDirection(){
-    // TODO
-    return -5;
+int ScrolrPluginAPI::getCurrentYOffset(){
+    return m_tracker.yOffset;
+}
+
+int ScrolrPluginAPI::getCurrentXOffset(){
+    return m_tracker.xOffset;
 }
 
 void ScrolrPluginAPI::track(){
     m_tracker.track();
 }
 
-void ScrolrPluginAPI::foo(int s){// TODO: REmove
-    std::cout << "Test" << std::endl;
+void ScrolrPluginAPI::initialize(){
+    m_tracker.initialize();
 }
 
 bool ScrolrPluginAPI::foundFile(){

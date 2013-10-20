@@ -35,7 +35,8 @@ public:
     {
         registerMethod("echo",      make_method(this, &ScrolrPluginAPI::echo));
 
-        registerMethod("getCurrentHeadDirection", make_method(this, &ScrolrPluginAPI::getCurrentHeadDirection));
+        registerMethod("getCurrentXOffset", make_method(this, &ScrolrPluginAPI::getCurrentXOffset));
+        registerMethod("getCurrentYOffset", make_method(this, &ScrolrPluginAPI::getCurrentYOffset));
         registerMethod("track", make_method(this, &ScrolrPluginAPI::track));
         registerMethod("foundFile", make_method(this, &ScrolrPluginAPI::foundFile));
         
@@ -82,21 +83,19 @@ public:
 
     // Method test-event
 
-    int getCurrentHeadDirection();
-    
+    int getCurrentYOffset();
+    int getCurrentXOffset();
     bool foundFile();
     void track();
+    void initialize();
     bool get_isTracking();
     void set_isTracking(bool);
-    //static void foo(int s);
-    void foo(int s);
 
 private:
     ScrolrPluginWeakPtr m_plugin;
     FB::BrowserHostPtr m_host;
 
     std::string m_testString;
-    
     Tracker m_tracker;
 };
 
