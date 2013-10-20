@@ -33,7 +33,7 @@ int Tracker::track(){
     cv::Mat grayscaleframe;
 
     // NOTE: If you can't see any rectangles, try full file path
-    char* s = "/home/mackward/scrolr/temp/src/dataSets/haarcascade_frontalface_alt.xml";
+    const char* s = "/home/mackward/scrolr/extension/haarcascade_frontalface_alt.xml";
 
     //use the haarcascade_frontalface_alt.xml library
     face_cascade.load(s);
@@ -80,8 +80,7 @@ void Tracker::initialize(){
      **************************************************************************/
 
     // NOTE: If you can't see any rectangles, try full file path
-    const char* s = "/home/mackward/scrolr/temp/src/dataSets/haarcascade_frontalface_alt.xml";
-    //const char* s = "/home/mackward/scrolr/firebreath/projects/ScrolrPlugin/haarcascade_frontalface_alt.xml";
+    const char* s = "/home/mackward/scrolr/extension/haarcascade_frontalface_alt.xml";
 
     fstream file(s);
     if (file){
