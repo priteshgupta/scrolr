@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-    <title>Scrolr</title>
+    <title>Scrolr by priteshgupta</title>
   </head>
 
   <body>
@@ -33,8 +33,8 @@
 
 <p>Scrolr is a Chrome extension which will change the way we browse the Internet. At present, we need to physically use a mouse or keyboard to scroll or interact with a webpage; however, with scrolr we can use our body gestures for doing the same thing without any external hardware like Leap Motion or Kinect!</p>
 
-<h5>
-<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h5>
+<h4>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h4>
 
 <ul>
 <li>Tilt your head up and down for scrolling pages up and down.</li>
@@ -47,15 +47,15 @@
 <h3>
 <a name="nerdy-details" class="anchor" href="#nerdy-details"><span class="octicon octicon-link"></span></a>Nerdy Details</h3>
 
-<h5>
-<a name="backend" class="anchor" href="#backend"><span class="octicon octicon-link"></span></a>Backend</h5>
+<h4>
+<a name="backend" class="anchor" href="#backend"><span class="octicon octicon-link"></span></a>Backend</h4>
 
 <p>Coded in C++, uses <a href="http://opencv.org/">OpenCV</a> (an open source computer vision library) for facial recognition and tracking.
 Frames are obtained one at a time, allowing the frontend to update the calculated face position as often
 (or as seldom) as necessary. </p>
 
-<h5>
-<a name="frontend" class="anchor" href="#frontend"><span class="octicon octicon-link"></span></a>Frontend</h5>
+<h4>
+<a name="frontend" class="anchor" href="#frontend"><span class="octicon octicon-link"></span></a>Frontend</h4>
 
 <p>A Chrome Extension which relies JavaScript for interaction between the users and the feature detection software. <a href="http://developer.chrome.com/extensions/npapi.html">NPAPI</a> is used to execute the C++ code in user's Chrome web browser as an extension. <a href="https://developers.google.com/native-client/">Google Native Client</a> was not used for it's lack of webcam support.</p>
       </section>
