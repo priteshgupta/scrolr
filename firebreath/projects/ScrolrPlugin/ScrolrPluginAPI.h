@@ -87,7 +87,7 @@ public:
     int getCurrentYOffset();
     int getCurrentXOffset();
     bool foundFile();
-    int track();
+    std::string track();
     int initialize();
     bool get_isTracking();
     void set_isTracking(bool);

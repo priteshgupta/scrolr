@@ -1,4 +1,4 @@
-var tracking = false;
+var tracking = true;
 
 function plugin0 (){
   return document.getElementById('plugin0');
@@ -11,7 +11,9 @@ function runTrackingLoop(){
       var ret = plugin.track().split(" ", 2);
       console.log(ret);
       chrome.tabs.executeScript(null, 
-        {code: "window.scrollBy(" + ret[0] + ", " + ret[1] + ");"});
+        {
+          code: "window.scrollBy(0, " + ret[1] + "); window.scrollBy(" + ret[0] + ", 0);"
+        });
     }
   },50);
 }
@@ -22,7 +24,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
     tracking = false;
     chrome.browserAction.setIcon({path: "icon-32-grey.png"});
   } else {
-    plugin0().initialize();
+    //plugin0().initialize();
     chrome.browserAction.setIcon({path: "icon-32.png"});
     tracking = true;
   }

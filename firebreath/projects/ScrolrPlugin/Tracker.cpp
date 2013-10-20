@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <stdio.h>
 #include <boost/thread.hpp>
 #include <opencv/cv.h>
@@ -12,6 +13,7 @@ using namespace cv;
 using std::cout;
 using std::endl;
 using std::fstream;
+using std::stringstream;
 
 
 
@@ -22,7 +24,7 @@ Tracker::Tracker(): m_foundFile(false), m_isTracking(true), xOffset(0), yOffset(
 
 Tracker::~Tracker() {}
 
-int Tracker::track(){
+string Tracker::track(){
 
     /**************************************************************************
      ****************************** Facial Tracking ***************************
@@ -64,13 +66,22 @@ int Tracker::track(){
         y = yInit;
     }
 
-    xOffset = (x - xInit);
+    xOffset =  (xInit - x)/2;
     yOffset = (y - yInit);
 
     imshow("outputcapture", captureframe); // TODO
     waitKey(5);
 
-    return yOffset;
+    string output = "";
+    stringstream xoff;
+    xoff << xOffset;
+    stringstream yoff;
+    yoff << yOffset;
+    output += xoff.str();
+    output += " ";
+    output += yoff.str();
+
+    return output;
 }
 
 void Tracker::initialize(){

@@ -14,7 +14,10 @@
 
 //Edited by Mack
 #include "Tracker.h"
+#include <string>
 #include <boost/thread.hpp>
+
+using std::string;
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -74,7 +77,7 @@ int ScrolrPluginAPI::getCurrentXOffset(){
     return m_tracker.xOffset;
 }
 
-int ScrolrPluginAPI::track(){
+string ScrolrPluginAPI::track(){
     return m_tracker.track();
 }
 

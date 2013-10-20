@@ -1,10 +1,12 @@
 #ifndef TRACKER_H_
 #define TRACKER_H_
 
+#include <string>
 #include <boost/thread.hpp>
 #include <opencv/cv.h>
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
+
 
 /*
  * This class is reponsible for running the tracking application
@@ -14,7 +16,7 @@ class Tracker
 public:
     Tracker();
     ~Tracker();
-    int track();
+    std::string track();
     void initialize();
     bool m_foundFile;
     bool m_isTracking;
