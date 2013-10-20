@@ -21,11 +21,11 @@ function runTrackingLoop(){
 
 window.onload = function () {
   var plugin = plugin0();
-  alert("ready?");
+  //alert("ready?");
   console.log("initializing");
-  //plugin.initialize();
+  plugin.initialize();
   console.log("starting tracking loop");
-  //runTrackingLoop();
+  runTrackingLoop();
   //appendToDoc("version = " + plugin.version);
   //appendToDoc("tracking = " + plugin.tracking);
 };
