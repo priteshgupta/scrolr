@@ -78,8 +78,9 @@ void ScrolrPluginAPI::track(){
     m_tracker.track();
 }
 
-void ScrolrPluginAPI::initialize(){
+int ScrolrPluginAPI::initialize(){
     m_tracker.initialize();
+    return 0;
 }
 
 void ScrolrPluginAPI::kill(){

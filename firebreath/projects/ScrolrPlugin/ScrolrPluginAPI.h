@@ -89,7 +89,7 @@ public:
     int getCurrentXOffset();
     bool foundFile();
     void track();
-    void initialize();
+    int initialize();
     void kill();
     bool get_isTracking();
     void set_isTracking(bool);
