@@ -74,17 +74,13 @@ int ScrolrPluginAPI::getCurrentXOffset(){
     return m_tracker.xOffset;
 }
 
-void ScrolrPluginAPI::track(){
-    m_tracker.track();
+int ScrolrPluginAPI::track(){
+    return m_tracker.track();
 }
 
 int ScrolrPluginAPI::initialize(){
     m_tracker.initialize();
     return 0;
-}
-
-void ScrolrPluginAPI::kill(){
-    m_tracker.kill();
 }
 
 bool ScrolrPluginAPI::foundFile(){
